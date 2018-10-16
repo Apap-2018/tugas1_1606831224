@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<object th:include="fragments/fragment :: header" th:remove="tag"></object>
+
+	</head>
+	
+	<body>
+	
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
+		<div class="container">
+			<div class="row">
+				<h2 th:text="'Detail ' + ${jabatan.nama}"></h2>
+			</div>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Nama</div>
+				<div th:text="${jabatan.nama}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Deskripsi</div>
+				<div th:text="${jabatan.deskripsi}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Gaji Pokok</div>
+				<div th:text="${jabatan.gajiPokok}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<div class="row">
+			
+				<form th:action="@{/jabatan/ubah}" method="GET">
+					<input type="hidden" name="idJabatan" th:value="${jabatan.id}">
+					<button type="submit">Ubah</button>	
+				</form>
+				
+				<form th:action="@{/jabatan/hapus}" method="POST">
+					<input type="hidden" name="idJabatan" th:value="${jabatan.id}">
+					<button type="submit">Hapus</button>	
+				</form>
+			
+			</div>
+			
+
+		</div>
+	
+		
+
+		
+		
+			
+	</body>
+</html>

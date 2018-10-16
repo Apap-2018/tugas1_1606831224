@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<object th:include="fragments/fragment :: header" th:remove="tag"></object>
+
+	</head>
+	
+	<body>
+	
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
+		<div class="container">
+			<div class="row">
+				<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h2>
+			</div>
+			<p>
+				<div class="row">
+					<div class="col-lg-4">NIP</div>
+					<div th:text="${pegawai.nip}" class="col-lg-8"></div>
+				</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Nama</div>
+				<div th:text="${pegawai.nama}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Tempat Lahir</div>
+				<div th:text="${pegawai.tempatLahir}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Tanggal Lahir</div>
+				<div th:text="${pegawai.tanggalLahir}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Tahun Masuk</div>
+				<div th:text="${pegawai.tahunMasuk}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Nama Instansi</div>
+				<div th:text="${instansi.nama}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Jabatan</div>
+				<div class="col-lg-8">
+					<ul th:each="jabatan : ${listJabatan}">
+						<li th:text="${jabatan.jabatan.nama}" >as</li>
+					
+					</ul>
+				</div>
+			</div>
+			</p>
+			
+			<p>
+			<div class="row">
+				<div class="col-lg-4">Gaji</div>
+				<div th:text="'Rp ' + ${gaji}" class="col-lg-8"></div>
+			</div>
+			</p>
+			
+			<button type="submit">Ubah</button>
+
+		</div>
+	
+		
+
+		
+		
+			
+	</body>
+</html>
