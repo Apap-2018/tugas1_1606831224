@@ -24,7 +24,7 @@
 					<tr th:each="jabatan : *{listJabatan}">
 						<td th:text="${jabatan.nama}"></td>
 						<td th:text="${jabatan.deskripsi}"></td>
-						<td th:text="${jabatan.gajiPokok}"></td>
+						<td th:text="${#numbers.formatInteger(jabatan.gajiPokok,3,'POINT')}"></td>
 						<td th:text="${#lists.size(jabatan.jabatanPegawaiList)}"></td>
 					
 					

@@ -210,17 +210,35 @@ public class PegawaiController {
 	
 	@RequestMapping(value = "/pegawai/ubah", method = RequestMethod.POST)
 	public String ubahJabatanBaru(@ModelAttribute PegawaiModel pegawai, Model model) {
-		
-		// membuat nip
+		System.out.println("masukkk coyyyyyyyyyyyyyyyyyyy");
+		// ambil pegawai sebelum diupdate
+		System.out.println(pegawai);
+		PegawaiModel pegawaiBefore = pegawaiService.findPegawaiByNip(pegawai.getNip());
+
 		String nip = pegawaiService.makeNip(pegawai.getInstansi(), pegawai);
 		pegawai.setNip(nip);
+//		
+//		pegawaiBefore.setInstansi(pegawai.getInstansi());
+//		pegawaiBefore.setNama(pegawai.getNama());
+//		pegawaiBefore.setNip(pegawai.getNip());
+//		pegawaiBefore.setTahunMasuk(pegawai.getTahunMasuk());
+//		pegawaiBefore.setTanggalLahir(pegawai.getTanggalLahir());
+//		pegawaiBefore.setTempatLahir(pegawai.getTempatLahir());
 		
-		List<JabatanPegawaiModel> listJabatan = pegawai.getJabatanPegawaiList();
+//		
+//		// update jabatan
+//		int jumlahList = pegawaiBefore.getJabatanPegawaiList().size();
+//		for (int i = 0; i< jumlahList; i++) {
+//			pegawaiBefore.getJabatanPegawaiList().get(i).setJabatan(pegawai.getJabatanPegawaiList().get(i).getJabatan());
+//		}
+//		
+//		for (int i = jumlahList; i < pegawai.getJabatanPegawaiList().size(); i++) {
+//			pegawai.getJabatanPegawaiList().get(i).setPegawai(pegawaiBefore);
+//			jabatanPegawaiService.add(pegawai.getJabatanPegawaiList().get(i));
+//	
+//		}
 		
-		pegawai.setJabatanPegawaiList(new ArrayList<JabatanPegawaiModel>());
-		
-		// tambahkan pegawai pada db dan megeset instansi
-		pegawaiService.add(pegawai);
+		pegawaiService.update(pegawai, pegawaiBefore);
 		
 		System.out.println();
 		System.out.println("haaaaaaaaaaaa" + pegawai.getId());
@@ -228,17 +246,33 @@ public class PegawaiController {
 		
 		
 		
-		// menambahkan setiap jabatanPegawai pada list
-		for (int i = 0; i < listJabatan.size(); i++) {
-			listJabatan.get(i).setPegawai(pegawai);
-			jabatanPegawaiService.add(listJabatan.get(i));
-		}
+
+		System.out.println("jabatannya bisa ditambahin coyyyyyyyyyyyyy");
 		
 		
 		model.addAttribute("title", "Sukses");
 		model.addAttribute("nipPegawai", nip);
 		return "ubah-pegawai-sukses";
 	}
+	
+	
+	@RequestMapping(value = "/pegawai/cari", method = RequestMethod.GET)
+	public String cariPegawai(Model model) {
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.findAll();
+		
+		List<InstansiModel> listInstansi = new ArrayList<InstansiModel>();
+		listInstansi = listProvinsi.get(0).getInstansiList();
+		List<JabatanModel> listJabatan = jabatanService.findAll();
+		
+		model.addAttribute("title", "Cari Pegawai");
+		model.addAttribute("listProvinsi", listProvinsi);
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("listJabatan", listJabatan);
+
+		return "cari-pegawai";
+	}
+	
 	
 	@RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
 	public String lihatPegawaiTuaDanMuda(@RequestParam(value="idInstansi") Long idInstansi, Model model) {

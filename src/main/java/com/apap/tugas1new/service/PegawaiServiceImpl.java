@@ -12,6 +12,7 @@ import com.apap.tugas1new.model.InstansiModel;
 import com.apap.tugas1new.model.JabatanPegawaiModel;
 import com.apap.tugas1new.model.PegawaiModel;
 import com.apap.tugas1new.model.ProvinsiModel;
+import com.apap.tugas1new.repository.JabatanPegawaiDB;
 import com.apap.tugas1new.repository.PegawaiDB;
 
 
@@ -21,6 +22,9 @@ public class PegawaiServiceImpl implements PegawaiService{
 
 	@Autowired
 	private PegawaiDB pegawaiDb;
+
+	@Autowired
+	private JabatanPegawaiDB jabatanPegawaiDb;
 	
 	@Override
 	public void add(PegawaiModel pegawai) {
@@ -99,6 +103,36 @@ public class PegawaiServiceImpl implements PegawaiService{
 		
 		
 		return nip;
+	}
+
+	@Override
+	public void delete(PegawaiModel pegawai) {
+		// TODO Auto-generated method stub
+		pegawaiDb.delete(pegawai);
+	}
+
+	@Override
+	public void update(PegawaiModel pegawaiUpdate, PegawaiModel pegawaiBefore) {
+		// TODO Auto-generated method stub
+		pegawaiBefore.setInstansi(pegawaiUpdate.getInstansi());
+		pegawaiBefore.setNama(pegawaiUpdate.getNama());
+		pegawaiBefore.setNip(pegawaiUpdate.getNip());
+		pegawaiBefore.setTahunMasuk(pegawaiUpdate.getTahunMasuk());
+		pegawaiBefore.setTanggalLahir(pegawaiUpdate.getTanggalLahir());
+		pegawaiBefore.setTempatLahir(pegawaiUpdate.getTempatLahir());
+		
+		
+		// update jabatan
+		int jumlahList = pegawaiBefore.getJabatanPegawaiList().size();
+		for (int i = 0; i< jumlahList; i++) {
+			pegawaiBefore.getJabatanPegawaiList().get(i).setJabatan(pegawaiUpdate.getJabatanPegawaiList().get(i).getJabatan());
+		}
+		
+		for (int i = jumlahList; i < pegawaiUpdate.getJabatanPegawaiList().size(); i++) {
+			pegawaiUpdate.getJabatanPegawaiList().get(i).setPegawai(pegawaiBefore);
+			jabatanPegawaiDb.save(pegawaiUpdate.getJabatanPegawaiList().get(i));
+		}
+		
 	}
 
 

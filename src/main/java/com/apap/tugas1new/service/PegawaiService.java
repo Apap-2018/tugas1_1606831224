@@ -19,4 +19,8 @@ public interface PegawaiService{
 	
 	String makeNip(InstansiModel instansi, PegawaiModel pegawai);
 	
+	void delete(PegawaiModel pegawai);
+	
+	void update(PegawaiModel pegawaiUpdate, PegawaiModel pegawaiBefore);
+	
 }

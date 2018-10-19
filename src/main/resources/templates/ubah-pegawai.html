@@ -16,7 +16,8 @@
 			</div>
 			
 			<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="POST">
-				<input type="hidden" th:value="${pegawai.id}" >
+				<input type="hidden" name="id" th:value="${pegawai.id}" >
+				<input type="hidden" name="nip" th:value="${pegawai.nip}" >
 				<p>
 				<div class="row">
 					<div class="col-lg-4">Nama</div>
