@@ -10,13 +10,13 @@
 	
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
-			<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="GET">
+			<form th:action="@{/pegawai/cari}" method="GET">
 				
 				<p>
 				<div class="row">
 					<div class="col-lg-4">Provinsi</div>
 					<div class="col-lg-4">
-						<select id="provinsi" name="provinsi">
+						<select id="provinsi" name="IdProvinsi">
 							<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
 						    <option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}"/>
 						</select>
@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-lg-4">Nama Instansi</div>
 					<div class="col-lg-4">
-						<select name="instansi" th:value="*{instansi}" id="instansi">
+						<select name="IdInstansi" id="instansi">
 						   <option disabled="disabled" selected="selected" >Pilih Instansi</option>
 						</select>
 					</div>
@@ -38,8 +38,8 @@
 				<p>
 				<div class="row">
 					<div class="col-lg-4">Jabatan</div>
-					<div class="col-lg-8" th:each="jabatanPegawai, statusJabatan : *{jabatanPegawaiList}" >
-						<select name="" class="col-lg-12">
+					<div class="col-lg-8" >
+						<select name="IdJabatan" class="col-lg-12">
 							<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
 						    <option th:each="jabatan, status : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"/>
 						</select>
@@ -47,10 +47,9 @@
 					</div>
 						
 				</div>
-				<br><button type="submit" name="addJabatan">Tambah Jabatan Lainnya</button>
 				</p>
 				
-				<button type="submit">Simpan</button>
+				<button type="submit" name="search">Search</button>
 			</form>
 		
 		
@@ -78,7 +77,7 @@
 						<td th:text="${pegawai.instansi.nama}"></td>
 						<td>
 							<ol>
-								<li th:each="jabatan: ${pegawai.jabatanPegawaiList}" th:text="${jabatan.nama}"></li>
+								<li th:each="jabatan: ${pegawai.jabatanPegawaiList}" th:text="${jabatan.jabatan.nama}"></li>
 							</ol>
 						</td>
 					
@@ -95,7 +94,7 @@
 			
 			$('#provinsi').change(
 			     function() {
-			         $.getJSON("/", {
+			         $.getJSON("/instansi/tambah", {
 			             provinsiId : $(this).val(),
 			             ajax : 'true'
 			         }, function(data) {

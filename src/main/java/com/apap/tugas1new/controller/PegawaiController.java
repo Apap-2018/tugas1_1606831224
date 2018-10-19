@@ -273,6 +273,86 @@ public class PegawaiController {
 		return "cari-pegawai";
 	}
 	
+	@RequestMapping(value = "/pegawai/cari", method = RequestMethod.GET, params= {"search"})
+	public String cariPegawaiBaru(@RequestParam(value="IdProvinsi", required=false) Optional<Long> IdProvinsi, 
+			@RequestParam(value="IdInstansi", required=false) Optional<Long> IdInstansi,
+			@RequestParam(value="IdJabatan", required=false) Optional<Long> IdJabatan, Model model) {
+		
+		System.out.println("asn   asdljkf");
+		
+		List<PegawaiModel> listPegawai = new ArrayList<PegawaiModel>();
+		if (IdProvinsi.isPresent()) {
+			if (IdInstansi.isPresent()) {
+				if (IdJabatan.isPresent()) {
+					InstansiModel instansi = instansiService.findById(IdInstansi.get());
+					JabatanModel jabatan = jabatanService.findById(IdJabatan.get());
+					
+					listPegawai = pegawaiService.findByInstansiAndJabatan(instansi, jabatan);
+					
+				}
+				else {
+					InstansiModel instansi = instansiService.findById(IdInstansi.get());
+					listPegawai = pegawaiService.findByInstansi(instansi);
+				}
+				
+			}
+			else {
+				if (IdJabatan.isPresent()) {
+					List<InstansiModel> listInstansi = provinsiService.findById(IdProvinsi.get()).getInstansiList();
+					
+					for (int i = 0; i < listInstansi.size(); i++) {
+						List<PegawaiModel> listPegawaiBaru = listInstansi.get(i).getPegawaiList();
+						for (int j = 0; j < listPegawaiBaru.size(); j++) {
+							for (int k = 0; k < listPegawaiBaru.get(j).getJabatanPegawaiList().size(); k++) {
+								if (listPegawaiBaru.get(j).getJabatanPegawaiList().get(k).getJabatan().getId() == IdJabatan.get()) {
+									listPegawai.add(listPegawaiBaru.get(j));
+									break;
+								}
+							}
+							
+						}
+					}
+
+					
+				}
+				else {
+					List<InstansiModel> listInstansi = provinsiService.findById(IdProvinsi.get()).getInstansiList();
+					for (int i = 0; i < listInstansi.size(); i++) {
+						List<PegawaiModel> listPegawaiBaru = listInstansi.get(i).getPegawaiList();
+						listPegawai.addAll(listPegawaiBaru);
+					}
+				}
+			}
+		}
+		else {
+			System.out.println("masuk");
+			if (IdJabatan.isPresent()) {
+				JabatanModel jabatan = jabatanService.findById(IdJabatan.get());
+				for (int i = 0; i< jabatan.getJabatanPegawaiList().size(); i++) {
+					listPegawai.add(jabatan.getJabatanPegawaiList().get(i).getPegawai());
+				}
+				
+			}
+		}
+//		System.out.println(listPegawai.size() + "         hahahah");
+//		for (int i = 0; i < listPegawai.size(); i++) {
+//			System.out.println(listPegawai.get(i));
+//		}
+		
+		List<ProvinsiModel> listProvinsi = provinsiService.findAll();
+		
+		List<InstansiModel> listInstansi = new ArrayList<InstansiModel>();
+		listInstansi = listProvinsi.get(0).getInstansiList();
+		List<JabatanModel> listJabatan = jabatanService.findAll();
+		
+		model.addAttribute("title", "Cari Pegawai");
+		model.addAttribute("listProvinsi", listProvinsi);
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("listJabatan", listJabatan);
+		model.addAttribute("listPegawai", listPegawai);
+		return "cari-pegawai";
+	}
+	
 	
 	@RequestMapping(value = "/pegawai/termuda-tertua", method = RequestMethod.GET)
 	public String lihatPegawaiTuaDanMuda(@RequestParam(value="idInstansi") Long idInstansi, Model model) {
