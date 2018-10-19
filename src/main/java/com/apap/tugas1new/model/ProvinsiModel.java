@@ -41,8 +41,6 @@ public class ProvinsiModel {
 	@OneToMany(mappedBy = "provinsi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<InstansiModel> instansiList;
 
-
-
 	public Long getId() {
 		return id;
 	}
@@ -74,6 +72,7 @@ public class ProvinsiModel {
 	public void setInstansiList(List<InstansiModel> instansiList) {
 		this.instansiList = instansiList;
 	}
-	
-	
+
+
+
 }

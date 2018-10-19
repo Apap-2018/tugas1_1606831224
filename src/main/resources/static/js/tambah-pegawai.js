@@ -7,13 +7,13 @@ $(document).ready(function () {
                 provinsiId : $(this).val(),
                 ajax : 'true'
             }, function(data) {
-                var html = '<select name="instansi">';
+                var html = '';
                 var len = data.length;
                 for ( var i = 0; i < len; i++) {
-                    html += '<option value="' + data[i].nama + '">'
+                    html += '<option value="' + data[i].id + '">'
                             + data[i].nama + '</option>';
                 }
-                html += '</select>';
+                html += '';
                 console.log("berhasil");
                 $('#instansi').html(html);
             });

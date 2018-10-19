@@ -28,7 +28,7 @@ public class InstansiModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -49,11 +49,11 @@ public class InstansiModel {
 	@OneToMany(mappedBy = "instansi", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<PegawaiModel> pegawaiList;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -88,8 +88,8 @@ public class InstansiModel {
 	public void setPegawaiList(List<PegawaiModel> pegawaiList) {
 		this.pegawaiList = pegawaiList;
 	}
-	
-	
+
+
 	
 
 }

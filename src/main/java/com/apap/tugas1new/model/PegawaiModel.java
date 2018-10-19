@@ -29,7 +29,7 @@ public class PegawaiModel implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -64,15 +64,13 @@ public class PegawaiModel implements Serializable{
 	@OneToMany(mappedBy = "pegawai", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<JabatanPegawaiModel> jabatanPegawaiList;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public String getNip() {
 		return nip;
@@ -81,8 +79,6 @@ public class PegawaiModel implements Serializable{
 	public void setNip(String nip) {
 		this.nip = nip;
 	}
-	
-	
 
 	public String getNama() {
 		return nama;
@@ -131,7 +127,8 @@ public class PegawaiModel implements Serializable{
 	public void setJabatanPegawaiList(List<JabatanPegawaiModel> jabatanPegawaiList) {
 		this.jabatanPegawaiList = jabatanPegawaiList;
 	}
-	
-	
+
+
+
 	
 }

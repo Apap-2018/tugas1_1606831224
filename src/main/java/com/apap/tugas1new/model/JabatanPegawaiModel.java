@@ -23,27 +23,25 @@ public class JabatanPegawaiModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "id_pegawai", referencedColumnName = "id", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private PegawaiModel pegawai;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name= "id_jabatan", referencedColumnName = "id", nullable = false)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JsonIgnore
 	private JabatanModel jabatan;
 
-
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -62,6 +60,7 @@ public class JabatanPegawaiModel {
 	public void setJabatan(JabatanModel jabatan) {
 		this.jabatan = jabatan;
 	}
-	
+
+
 	
 }

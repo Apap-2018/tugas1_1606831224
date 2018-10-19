@@ -28,7 +28,7 @@ public class JabatanModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@NotNull
 	@Size(max = 255)
@@ -44,14 +44,14 @@ public class JabatanModel {
 	@Column(name = "gaji_pokok", nullable = false )
 	private double gajiPokok;
 	
-	@OneToMany(mappedBy = "jabatan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "jabatan", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<JabatanPegawaiModel> jabatanPegawaiList;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -86,6 +86,6 @@ public class JabatanModel {
 	public void setJabatanPegawaiList(List<JabatanPegawaiModel> jabatanPegawaiList) {
 		this.jabatanPegawaiList = jabatanPegawaiList;
 	}
-	
-	
+
+
 }

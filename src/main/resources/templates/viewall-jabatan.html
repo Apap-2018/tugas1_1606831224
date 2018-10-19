@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<object th:include="fragments/fragment :: header" th:remove="tag"></object>
+
+	</head>
+	
+	<body>
+	
+		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
+		<table id="table_id" class="display">
+			<thead>
+					<tr>
+						<th>Nama</th>
+						<th>Deskripsi</th>
+						<th>Gaji Pokok</th>
+						<th>Jumlah Pegawai
+					
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="jabatan : *{listJabatan}">
+						<td th:text="${jabatan.nama}"></td>
+						<td th:text="${jabatan.deskripsi}"></td>
+						<td th:text="${jabatan.gajiPokok}"></td>
+						<td th:text="${#lists.size(jabatan.jabatanPegawaiList)}"></td>
+					
+					
+					</tr>
+				</tbody>
+			
+		</table>
+
+		<script th:src="@{/js/datatable.js}"></script>
+			
+	</body>
+</html>
