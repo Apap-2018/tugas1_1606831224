@@ -92,10 +92,11 @@
 			</form>
 
 		</div>
-	
+		
 
 	<script type="text/javascript">
 	$(document).ready(function () {
+		$("#tambahPegawai").addClass("active");   
 	    $("#provinsi").change(function () {
 
             $.getJSON("/instansi/tambah", {

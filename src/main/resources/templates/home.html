@@ -10,42 +10,77 @@
 	
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
-		<h2>Sistem Informasi Kepegawaian</h2>
-		<p>Selamat datang di Sistem Informasi Kepegawaian</p>
+		<div class="container">
+			<h2>Sistem Informasi Kepegawaian</h2>
+			<p>Selamat datang di Sistem Informasi Kepegawaian</p>
+			
+			<hr>
+			
+			<div class="card">
+				<div class="card-header">
+					<h2>Lihat Data Pegawai berdasarkan NIP</h2>
+				</div>
+				<div class="card-body">
+					<p>Masukkan Nomor Induk Pegawai</p>
+					<form th:action="@{/pegawai}" method="GET">
+						<input type="text" class="col-md-6" name="nip">
+						<br>	
+						<button type="submit">Lihat</button>		
+					</form>
+				</div>
+				
+			</div>
+			
+			<hr>
+			
+			<div class="card">
+				<div class="card-header">
+					<h2>Lihat Detail Jabatan</h2>
+				</div>
+				<div class="card-body">
+					<p>Pilih Jabatan</p>
+					<form th:action="@{/jabatan/view}" method="GET">
+							<select name="idJabatan">
+							    <option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"/>
+							</select><br>
+						<br>	
+						<button type="submit">Lihat</button>		
+					</form>
+				</div>
+				
+			</div>
+			
+			
+			<hr>
+			
+			<div class="card">
+				<div class="card-header">
+					<h2>Lihat Pegawai Termuda dan Tertua</h2>
+				</div>
+				<div class="card-body">
+					<p>Pilih Instansi</p>
+					<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+						<select name="idInstansi">
+						    <option th:each="instansi : ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}"/>
+						</select><br>
+					<br>	
+					<button type="submit">Lihat</button>		
+			</form>
+				</div>
+				
+			</div>
+			
+			
+			
+		</div>
 		
-		<hr>
+		<script type="text/javascript">
+		$(document).ready(function () {
+		    $("#home").addClass("active");    
+		        
+		});
 		
-		<h2>Lihat Data Pegawai berdasarkan NIP</h2>
-		<p>Masukkan Nomor Induk Pegawai</p>
-		<form th:action="@{/pegawai}" method="GET">
-			<input type="text" class="col-md-6" name="nip">
-			<br>	
-			<button type="submit">Lihat</button>		
-		</form>
-		
-		<hr>
-		
-		<h2>Lihat Detail Jabatan</h2>
-		<p>Pilih Jabatan</p>
-		<form th:action="@{/jabatan/view}" method="GET">
-				<select name="idJabatan">
-				    <option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"/>
-				</select><br>
-			<br>	
-			<button type="submit">Lihat</button>		
-		</form>
-		
-		<hr>
-		
-		<h2>Lihat Pegawai Termuda dan Tertua</h2>
-		<p>Pilih Instansi</p>
-		<form th:action="@{/pegawai/termuda-tertua}" method="GET">
-				<select name="idInstansi">
-				    <option th:each="instansi : ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama}"/>
-				</select><br>
-			<br>	
-			<button type="submit">Lihat</button>		
-		</form>
+		</script>
 		
 			
 	</body>
