@@ -90,6 +90,7 @@ public class JabatanController {
 		jabatan.setGajiPokok(jabatan_ubah.getGajiPokok());
 		
 		model.addAttribute("title", "Tambah Jabatan");
+		model.addAttribute("message", true);
 		model.addAttribute("jabatan", jabatan);
 		return "ubah-jabatan";
 	}

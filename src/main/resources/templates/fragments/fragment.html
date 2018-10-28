@@ -6,12 +6,25 @@
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 				
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+		
+		<style type="text/css">
+			hr.style5 {
+				background-color: #fff;
+				border-top: 2px dashed #8c8b8b;
+			}
+			
+			hr.style2 {
+				border-top: 3px double #8c8b8b;
+			}
+		
+		</style>
 	
 		<script th:src="@{/js/bootstrap.min.js}"></script>
 		
 		<script th:src="@{/js/jquery/jquery-3.3.1.min.js}"></script>
-
- 
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 		
 		<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
 		
 		
@@ -41,6 +54,12 @@
 				</ul>
 			</div>
 		</nav>
+		
+		
+		<footer  th:fragment="footer">
+			<hr>
+			<p>asu</p>		
+		</footer>
 		
 			
 	</body>

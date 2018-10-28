@@ -11,42 +11,53 @@
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
 		<div class="container">
-			<div class="row">
-				<h2>Ubah Jabatan</h2>
+		
+			<div th:if="${message}">
+				<div class="alert alert-success alert-dismissible">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Success!</strong> Jabatan berhasil diubah
+				</div>
+			
 			</div>
+			
+			
+			<h2>Ubah Jabatan</h2>
+			
+			<hr class="style5">
 			
 			<form th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="POST">
 			
 				<input type="hidden" name="id" th:value="${jabatan.id}">
+				
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Nama</div>
-					<div class="col-lg-4">
-						<input type="text" name="nama" th:value="${jabatan.nama}">
+					<label class="col-lg-4" for="nama">Nama</label>
+					<div class="col-lg-8">
+						<input class="form-control" type="text" name="nama" th:value="${jabatan.nama}" required>
 					</div>
 				</div>
 				</p>
 				
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Deskripsi</div>
-					<div class="col-lg-4">
-						<input type="text" name="deskripsi" th:value="${jabatan.deskripsi}">
+					<label class="col-lg-4" for="deskripsi">Deskripsi</label>
+					<div class="col-lg-8">
+						<input class="form-control" type="text" name="deskripsi" th:value="${jabatan.deskripsi}" required>
 					</div>
 				</div>
 				</p>
 				
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Gaji Pokok</div>
-					<div class="col-lg-4">
-						<input type="number" name="gajiPokok" step="1" th:value="${jabatan.gajiPokok}">
+					<label class="col-lg-4" for="gajiPokok">Gaji Pokok</label>
+					<div class="col-lg-8">
+						<input class="form-control" type="number" name="gajiPokok" step="1" th:value="${jabatan.gajiPokok}" required>
 					</div>
 				</div>
 				</p>
 			
 				
-				<button type="submit">Simpan</button>
+				<button class="btn btn-dark" type="submit">Simpan</button>
 			</form>
 
 		</div>

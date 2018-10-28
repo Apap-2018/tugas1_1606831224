@@ -14,6 +14,7 @@ import com.apap.tugas1new.model.JabatanModel;
 import com.apap.tugas1new.model.JabatanPegawaiModel;
 import com.apap.tugas1new.model.PegawaiModel;
 import com.apap.tugas1new.model.ProvinsiModel;
+import com.apap.tugas1new.repository.JabatanDB;
 import com.apap.tugas1new.repository.JabatanPegawaiDB;
 import com.apap.tugas1new.repository.PegawaiDB;
 
@@ -27,6 +28,9 @@ public class PegawaiServiceImpl implements PegawaiService{
 
 	@Autowired
 	private JabatanPegawaiDB jabatanPegawaiDb;
+	
+	@Autowired
+	private JabatanDB jabatanDb;
 	
 	@Override
 	public void add(PegawaiModel pegawai) {
@@ -78,8 +82,6 @@ public class PegawaiServiceImpl implements PegawaiService{
 	public String makeNip(InstansiModel instansi, PegawaiModel pegawai) {
 		// TODO Auto-generated method stub
 		
-		ProvinsiModel provinsi = instansi.getProvinsi();
-		
 		String nip = "";
 		nip += instansi.getId();
 
@@ -116,9 +118,16 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override
 	public void update(PegawaiModel pegawaiUpdate, PegawaiModel pegawaiBefore) {
 		// TODO Auto-generated method stub
+		
+		System.out.println(this.checkUpdate(pegawaiUpdate, pegawaiBefore));
+		
+		if (this.checkUpdate(pegawaiUpdate, pegawaiBefore)) {
+			String nip = this.makeNip(pegawaiUpdate.getInstansi(), pegawaiUpdate);
+			pegawaiBefore.setNip(nip);
+		}
+		
 		pegawaiBefore.setInstansi(pegawaiUpdate.getInstansi());
 		pegawaiBefore.setNama(pegawaiUpdate.getNama());
-		pegawaiBefore.setNip(pegawaiUpdate.getNip());
 		pegawaiBefore.setTahunMasuk(pegawaiUpdate.getTahunMasuk());
 		pegawaiBefore.setTanggalLahir(pegawaiUpdate.getTanggalLahir());
 		pegawaiBefore.setTempatLahir(pegawaiUpdate.getTempatLahir());
@@ -136,22 +145,48 @@ public class PegawaiServiceImpl implements PegawaiService{
 		}
 		
 	}
+	
+	@Override
+	public boolean checkUpdate(PegawaiModel pegawaiUpdate, PegawaiModel pegawaiBefore) {
+		if (pegawaiUpdate.getTahunMasuk().equals(pegawaiBefore.getTahunMasuk())) {
+			if (pegawaiUpdate.getTanggalLahir().equals(pegawaiBefore.getTanggalLahir())) {
+				if (pegawaiUpdate.getInstansi().getId() == pegawaiBefore.getInstansi().getId()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	@Override
 	public List<PegawaiModel> findByInstansiAndJabatan(InstansiModel instansi, JabatanModel jabatan) {
 		// TODO Auto-generated method stub
 		List<PegawaiModel> hasil = new ArrayList<PegawaiModel>();
-		List<PegawaiModel> listPegawaiInstansi = pegawaiDb.findByInstansi(instansi);
+		List<JabatanPegawaiModel> listPegawaiJabatan = jabatanDb.findById(jabatan.getId()).get().getJabatanPegawaiList();
 		
-		for (int i = 0; i < listPegawaiInstansi.size(); i++) {
-			int sizeJ = listPegawaiInstansi.get(i).getJabatanPegawaiList().size();
-			for (int j = 0; j < sizeJ; j++ ) {
-				if (listPegawaiInstansi.get(i).getJabatanPegawaiList().get(j).getJabatan().getId() == jabatan.getId()) {
-					hasil.add(listPegawaiInstansi.get(i));
-				}
+		for (int i = 0; i < listPegawaiJabatan.size(); i++) {
+			if (listPegawaiJabatan.get(i).getPegawai().getInstansi().getId() == instansi.getId()) {
+				hasil.add(listPegawaiJabatan.get(i).getPegawai());
 			}
 			
 		}
+		
+		return hasil;
+	}
+	
+	@Override
+	public List<PegawaiModel> findByProvinsiAndJabatan(ProvinsiModel provinsi, JabatanModel jabatan) {
+		// TODO Auto-generated method stub
+		List<PegawaiModel> hasil = new ArrayList<PegawaiModel>();
+		List<JabatanPegawaiModel> listPegawaiJabatan = jabatanDb.findById(jabatan.getId()).get().getJabatanPegawaiList();
+		
+		for (int i = 0; i < listPegawaiJabatan.size(); i++) {
+			if (listPegawaiJabatan.get(i).getPegawai().getInstansi().getProvinsi().getId() == provinsi.getId()) {
+				hasil.add(listPegawaiJabatan.get(i).getPegawai());
+			}
+			
+		}
+		
 		return hasil;
 	}
 

@@ -11,9 +11,10 @@
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
 		<div class="container">
-			<div class="row">
-				<h2 th:text="'Detail ' + ${jabatan.nama}"></h2>
-			</div>
+			
+			<h2 th:text="'Detail ' + ${jabatan.nama}"></h2>
+			
+			<hr class="style5">
 			
 			<p>
 			<div class="row">
@@ -32,22 +33,29 @@
 			<p>
 			<div class="row">
 				<div class="col-lg-4">Gaji Pokok</div>
-				<div th:text="${jabatan.gajiPokok}" class="col-lg-8"></div>
+				<div th:text="'Rp ' +${#numbers.formatInteger(jabatan.gajiPokok,3,'POINT')}" class="col-lg-8"></div>
 			</div>
 			</p>
 			
 			<div class="row">
-			
-				<form th:action="@{/jabatan/ubah}" method="GET">
-					<input type="hidden" name="idJabatan" th:value="${jabatan.id}">
-					<button type="submit">Ubah</button>	
-				</form>
+				<div class="col-lg-2">
 				
-				<form th:action="@{/jabatan/hapus}" method="POST">
-					<input type="hidden" name="idJabatan" th:value="${jabatan.id}">
-					<button type="submit">Hapus</button>	
-				</form>
-			
+					<form th:action="@{/jabatan/ubah}" method="GET">
+						<input type="hidden" name="idJabatan" th:value="${jabatan.id}">
+						<button class="btn btn-info" type="submit">Ubah</button>	
+					</form>
+				
+				</div>
+				
+				<div class="col-lg-2">
+				
+					<form th:action="@{/jabatan/hapus}" method="POST">
+						<input type="hidden" name="idJabatan" th:value="${jabatan.id}">
+						<button class="btn btn-danger" type="submit">Hapus</button>	
+					</form>
+				
+				</div>
+	
 			</div>
 			
 

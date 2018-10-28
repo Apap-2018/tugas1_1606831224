@@ -11,9 +11,10 @@
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
 		<div class="container">
-			<div class="row">
-				<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h2>
-			</div>
+			<h2 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h2>
+			
+			<hr class="style5">
+			
 			<p>
 				<div class="row">
 					<div class="col-lg-4">NIP</div>
@@ -61,9 +62,9 @@
 				<div class="col-lg-4">Jabatan</div>
 				<div class="col-lg-8">
 					<ul th:each="jabatan : ${listJabatan}">
-						<li th:text="${jabatan.jabatan.nama}" >as</li>
+						<li th:text="${jabatan.jabatan.nama}" ></li>
 					
-					</ul>
+					</ul>	
 				</div>
 			</div>
 			</p>
@@ -71,14 +72,14 @@
 			<p>
 			<div class="row">
 				<div class="col-lg-4">Gaji</div>
-				<div th:text="'Rp ' + ${gaji}" class="col-lg-8"></div>
+				<div th:text="'Rp ' +${#numbers.formatInteger(gaji,3,'POINT')}" class="col-lg-8"></div>
 			</div>
 			</p>
 			
 			
 			<form th:action="@{/pegawai/ubah}" method="GET">
 				<input type="hidden" class="col-md-6" th:field="${pegawai.nip}" name="nip">
-				<button type="submit">Ubah</button>		
+				<button class="btn btn-dark" type="submit">Ubah</button>		
 			</form>
 
 

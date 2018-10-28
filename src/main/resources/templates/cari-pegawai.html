@@ -10,13 +10,15 @@
 	
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
+		<div class="container">
+		
 			<form th:action="@{/pegawai/cari}" method="GET">
 				
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Provinsi</div>
-					<div class="col-lg-4">
-						<select id="provinsi" name="IdProvinsi">
+					<label class="col-lg-4" for="IdProvinsi">Nama Provinsi</label>
+					<div class="col-lg-8">
+						<select class="form-control" id="provinsi" name="IdProvinsi">
 							<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
 						    <option th:each="provinsi : ${listProvinsi}" th:value="${provinsi.id}" th:text="${provinsi.nama}"/>
 						</select>
@@ -26,9 +28,9 @@
 				
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Nama Instansi</div>
-					<div class="col-lg-4">
-						<select name="IdInstansi" id="instansi">
+					<label class="col-lg-4" for="idInstansi">Nama Instansi</label>
+					<div class="col-lg-8">
+						<select class="form-control" name="IdInstansi" id="instansi">
 						   <option disabled="disabled" selected="selected" >Pilih Instansi</option>
 						</select>
 					</div>
@@ -37,9 +39,9 @@
 				
 				<p>
 				<div class="row">
-					<div class="col-lg-4">Jabatan</div>
+					<label class="col-lg-4" for="IdJabatan">Nama Jabatan</label>
 					<div class="col-lg-8" >
-						<select name="IdJabatan" class="col-lg-12">
+						<select name="IdJabatan" class="form-control">
 							<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
 						    <option th:each="jabatan, status : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"/>
 						</select>
@@ -49,11 +51,11 @@
 				</div>
 				</p>
 				
-				<button type="submit" name="search">Search</button>
+				<button class="btn btn-dark" type="submit" name="search">Search</button>
 			</form>
 		
 		
-		<hr>
+		<hr class="style5">
 		
 		<table id="table_id" class="display">
 			<thead>
@@ -86,6 +88,8 @@
 				</tbody>
 			
 		</table>
+		
+		</div>
 
 		<script>
 			$(document).ready( function () {

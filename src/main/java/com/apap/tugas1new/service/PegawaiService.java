@@ -29,5 +29,9 @@ public interface PegawaiService{
 	List<PegawaiModel> findByInstansi(InstansiModel instansi);
 	
 	List<PegawaiModel> findAll();
+
+	List<PegawaiModel> findByProvinsiAndJabatan(ProvinsiModel provinsi, JabatanModel jabatan);
+
+	boolean checkUpdate(PegawaiModel pegawaiUpdate, PegawaiModel pegawaiBefore);
 	
 }

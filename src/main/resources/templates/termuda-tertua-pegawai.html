@@ -9,145 +9,157 @@
 	<body>
 	
 		<nav th:replace="fragments/fragment :: navbar"></nav>
+		
 		<div class="container">
+			<p></p>
 			<div class=" row">
 			
 				<div class="col-md-6">
-				
-					<div class="row">
-						<h2>Data Pegawai Termuda</h2>
-					</div>
-					<p>
-						<div class="row">
-							<div class="col-lg-4">NIP</div>
-							<div th:text="${pegawaiMuda.nip}" class="col-lg-8"></div>
+					
+					<div class="card border-dark">
+						<div class="card-header bg-dark text-white">
+							<h2>Data Pegawai Termuda</h2>
 						</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Nama</div>
-						<div th:text="${pegawaiMuda.nama}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Tempat Lahir</div>
-						<div th:text="${pegawaiMuda.tempatLahir}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Tanggal Lahir</div>
-						<div th:text="${pegawaiMuda.tanggalLahir}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Tahun Masuk</div>
-						<div th:text="${pegawaiMuda.tahunMasuk}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Nama Instansi</div>
-						<div th:text="${pegawaiMuda.instansi.nama}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Jabatan</div>
-						<div class="col-lg-8">
-							<ul th:each="jabatan : ${pegawaiMuda.jabatanPegawaiList}">
-								<li th:text="${jabatan.jabatan.nama}" >as</li>
+						<div class="card-body">
+							<p>
+								<div class="row">
+									<div class="col-lg-4">NIP</div>
+									<div th:text="${pegawaiMuda.nip}" class="col-lg-8"></div>
+								</div>
+							</p>
 							
-							</ul>
-						</div>
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Nama</div>
+								<div th:text="${pegawaiMuda.nama}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Tempat Lahir</div>
+								<div th:text="${pegawaiMuda.tempatLahir}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Tanggal Lahir</div>
+								<div th:text="${pegawaiMuda.tanggalLahir}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Tahun Masuk</div>
+								<div th:text="${pegawaiMuda.tahunMasuk}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Nama Instansi</div>
+								<div th:text="${pegawaiMuda.instansi.nama}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Jabatan</div>
+								<div class="col-lg-8">
+									<ul th:each="jabatan : ${pegawaiMuda.jabatanPegawaiList}">
+										<li th:text="${jabatan.jabatan.nama}" >as</li>
+									
+									</ul>
+								</div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Gaji</div>
+								<div th:text="'Rp ' +${#numbers.formatInteger(gajiMuda,3,'POINT')}" class="col-lg-8"></div>
+							</div>
+							</p>
+						</div>	
 					</div>
-					</p>
 					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Gaji</div>
-						<div th:text="'Rp ' + ${gajiMuda}" class="col-lg-8"></div>
-					</div>
-					</p>
+					
 				
 				
 				
 				</div>
 				<div class="col-md-6">
 				
-					<div class="row">
-						<h2>Data Pegawai Tertua</h2>
-					</div>
-					<p>
-						<div class="row">
-							<div class="col-lg-4">NIP</div>
-							<div th:text="${pegawaiTua.nip}" class="col-lg-8"></div>
+					<div class="card border-dark">
+						<div class="card-header bg-dark text-white">
+							<h2>Data Pegawai Tertua</h2>
 						</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Nama</div>
-						<div th:text="${pegawaiTua.nama}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Tempat Lahir</div>
-						<div th:text="${pegawaiTua.tempatLahir}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Tanggal Lahir</div>
-						<div th:text="${pegawaiTua.tanggalLahir}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Tahun Masuk</div>
-						<div th:text="${pegawaiTua.tahunMasuk}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Nama Instansi</div>
-						<div th:text="${pegawaiTua.instansi.nama}" class="col-lg-8"></div>
-					</div>
-					</p>
-					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Jabatan</div>
-						<div class="col-lg-8">
-							<ul th:each="jabatan : ${pegawaiTua.jabatanPegawaiList}">
-								<li th:text="${jabatan.jabatan.nama}" ></li>
+						<div class="card-body">
+							<p>
+								<div class="row">
+									<div class="col-lg-4">NIP</div>
+									<div th:text="${pegawaiTua.nip}" class="col-lg-8"></div>
+								</div>
+							</p>
 							
-							</ul>
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Nama</div>
+								<div th:text="${pegawaiTua.nama}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Tempat Lahir</div>
+								<div th:text="${pegawaiTua.tempatLahir}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Tanggal Lahir</div>
+								<div th:text="${pegawaiTua.tanggalLahir}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Tahun Masuk</div>
+								<div th:text="${pegawaiTua.tahunMasuk}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Nama Instansi</div>
+								<div th:text="${pegawaiTua.instansi.nama}" class="col-lg-8"></div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Jabatan</div>
+								<div class="col-lg-8">
+									<ul th:each="jabatan : ${pegawaiTua.jabatanPegawaiList}">
+										<li th:text="${jabatan.jabatan.nama}" ></li>
+									
+									</ul>
+								</div>
+							</div>
+							</p>
+							
+							<p>
+							<div class="row">
+								<div class="col-lg-4">Gaji</div>
+								<div th:text="'Rp ' +${#numbers.formatInteger(gajiTua,3,'POINT')}" class="col-lg-8"></div>
+							</div>
+							</p>
 						</div>
-					</div>
-					</p>
 					
-					<p>
-					<div class="row">
-						<div class="col-lg-4">Gaji</div>
-						<div th:text="'Rp ' + ${gajiTua}" class="col-lg-8"></div>
+				
 					</div>
-					</p>
-				
-				
 				
 				
 				</div>

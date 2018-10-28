@@ -1,5 +1,6 @@
 package com.apap.tugas1new.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -74,6 +75,7 @@ public class PegawaiController {
 	@RequestMapping(value = "/pegawai/tambah", method = RequestMethod.GET)
 	public String tambahPegawai(Model model) {
 		PegawaiModel pegawai = new PegawaiModel();
+		pegawai.setTanggalLahir(new Date(118, 9, 11));
 		List<ProvinsiModel> listProvinsi = provinsiService.findAll();
 		List<JabatanPegawaiModel> listJabatanPegawai = new ArrayList<JabatanPegawaiModel>();
 		pegawai.setJabatanPegawaiList(listJabatanPegawai);
@@ -130,8 +132,6 @@ public class PegawaiController {
 		
 		// tambahkan pegawai pada db dan megeset instansi
 		pegawaiService.add(pegawai);
-		
-		
 		
 		// menambahkan setiap jabatanPegawai pada list
 		for (int i = 0; i < listJabatan.size(); i++) {
@@ -191,12 +191,12 @@ public class PegawaiController {
 	public String ubahJabatanBaru(@ModelAttribute PegawaiModel pegawai, Model model) {
 		// ambil pegawai sebelum diupdate
 		PegawaiModel pegawaiBefore = pegawaiService.findPegawaiByNip(pegawai.getNip());
-
-		String nip = pegawaiService.makeNip(pegawai.getInstansi(), pegawai);
-		pegawai.setNip(nip);
+		
+		System.out.println("hahahahahha " + pegawai.getJabatanPegawaiList());
 		
 		pegawaiService.update(pegawai, pegawaiBefore);
 		
+		String nip = pegawaiBefore.getNip();
 		
 		model.addAttribute("title", "Sukses");
 		model.addAttribute("nipPegawai", nip);
@@ -246,20 +246,10 @@ public class PegawaiController {
 			}
 			else {
 				if (IdJabatan.isPresent()) {
-					List<InstansiModel> listInstansi = provinsiService.findById(IdProvinsi.get()).getInstansiList();
+					ProvinsiModel provinsi = provinsiService.findById(IdProvinsi.get());
+					JabatanModel jabatan = jabatanService.findById(IdJabatan.get());
 					
-					for (int i = 0; i < listInstansi.size(); i++) {
-						List<PegawaiModel> listPegawaiBaru = listInstansi.get(i).getPegawaiList();
-						for (int j = 0; j < listPegawaiBaru.size(); j++) {
-							for (int k = 0; k < listPegawaiBaru.get(j).getJabatanPegawaiList().size(); k++) {
-								if (listPegawaiBaru.get(j).getJabatanPegawaiList().get(k).getJabatan().getId() == IdJabatan.get()) {
-									listPegawai.add(listPegawaiBaru.get(j));
-									break;
-								}
-							}
-							
-						}
-					}
+					listPegawai = pegawaiService.findByProvinsiAndJabatan(provinsi, jabatan);
 
 					
 				}
